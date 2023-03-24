@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app/models/todo.dart';
 
@@ -8,32 +9,39 @@ class TodoProvider extends ChangeNotifier {
   //test data
   List<Todo> allTodos = [
     Todo(
-      title: "Meet with Boss",
+      title: "Đi chợ",
       date: DateTime.now(),
-      time: "8:00 AM",
-      description: "Approval for new project",
-      priority: TodoPriority.urgent,
-    ),
-    Todo(
-      title: "Pick up Joey from Basketball",
-      date: DateTime.now(),
-      time: "3:00 PM",
-      description: "",
+      time: "8:00 Sáng",
+      description: "Mua thực phẩm cho cả tuần",
       priority: TodoPriority.important,
     ),
     Todo(
-      title: "Breakfast Meeting",
+      title: "Tập thể dục",
       date: DateTime.now(),
-      time: "9:30 AM",
-      description: "With department heads",
+      time: "6:00 Chiều",
+      description: "Chạy bộ hoặc tập thể dục thể thao",
+      priority: TodoPriority.normal,
+    ),
+    Todo(
+      title: "Học tập",
+      date: DateTime.now(),
+      time: "7:00 Tối",
+      description: "Ôn tập kiến thức, làm bài tập, đọc sách",
       priority: TodoPriority.urgent,
     ),
     Todo(
-      title: "Lunch at Zambino's with Greg",
+      title: "Gọi điện",
       date: DateTime.now(),
-      time: "12:00 PM",
-      description: "To discuss Exodus presentation",
+      time: "10:00 Sáng",
+      description: "Liên lạc với khách hàng để bàn giao sản phẩm",
       priority: TodoPriority.normal,
+    ),
+    Todo(
+      title: "Viết blog",
+      date: DateTime.now(),
+      time: "",
+      description: "Viết bài blog về chủ đề kinh doanh",
+      priority: TodoPriority.urgent,
     ),
   ];
 
@@ -61,6 +69,15 @@ class TodoProvider extends ChangeNotifier {
   }
 
   List<Todo> getSearchResults(String task) {
-    return allTodos.where((element) => RegExp(task, caseSensitive: false).hasMatch(element.title)).toList();
+    return extractAllSorted<Todo>(
+      query: task,
+      choices: allTodos,
+      getter: (obj) => obj.title,
+    ).fold([], (previousValue, element) {
+      if (element.score > 50) {
+        return previousValue..add(element.choice);
+      }
+      return previousValue;
+    });
   }
 }

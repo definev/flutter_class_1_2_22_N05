@@ -19,7 +19,7 @@ class SearchResultsPage extends StatelessWidget {
         centerTitle: true,
         title: RichText(
           text: TextSpan(
-            text: "Showing search results for: ",
+            text: "Kết quả tìm kiếm cho: ",
             children: [
               TextSpan(
                 text: task,
@@ -43,7 +43,7 @@ class SearchResultsPage extends StatelessWidget {
           children: [
             Visibility(
               replacement: const Center(
-                child: Text("0 items found"),
+                child: Text("Không tìm thấy"),
               ),
               visible: searchResults.isNotEmpty,
               child: Expanded(
