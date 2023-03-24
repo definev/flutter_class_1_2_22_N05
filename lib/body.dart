@@ -14,8 +14,7 @@ class Body extends StatelessWidget {
           padding: EdgeInsets.only(top: 15, bottom: 10),
           child: Text(
             "Danh sách công việc",
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 30, color: Colors.black),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30, color: Colors.black),
           ),
         ),
         bottom: TabBar(
@@ -34,7 +33,8 @@ class Body extends StatelessWidget {
         ),
       ),
       body: const TabBarView(
-          children: [TodosPage(), CompletedTodosPage(), DeletedTodosPage()]),
+        children: [TodosPage(), CompletedTodosPage(), DeletedTodosPage()],
+      ),
     );
   }
 }

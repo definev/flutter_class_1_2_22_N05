@@ -21,8 +21,8 @@ class TodoPage extends StatelessWidget {
         context: context,
         barrierDismissible: false,
         builder: (context) => AlertDialog(
-          title: const Text("Delete task"),
-          content: const Text("Are you sure you want to delete this task?"),
+          title: const Text("Xóa tác vụ"),
+          content: const Text("Bạn có chắc chắn muốn xóa tác vụ này không?"),
           actions: [
             InkWell(
               onTap: () {
@@ -30,14 +30,14 @@ class TodoPage extends StatelessWidget {
                 closePage();
                 closePage();
               },
-              child: const Text("Yes"),
+              child: const Text("Ok"),
             ),
             const Padding(padding: EdgeInsets.only(right: 15)),
             InkWell(
               onTap: () {
                 closePage();
               },
-              child: const Text("No"),
+              child: const Text("Không"),
             ),
           ],
         ),
